@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server.bundle.js",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "dev": "concurrently \"npm run build -- --watch\" \"nodemon dist/server.bundle.js\""
   },
   "author": "Sebastian Radloff",
   "license": "ISC",
@@ -17,6 +18,8 @@
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.22.0",
+    "concurrently": "^3.1.0",
+    "nodemon": "^1.11.0",
     "webpack": "^1.14.0"
   }
 }

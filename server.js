@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.get('*', (req, res) => {
-  res.status(HTTPStatus.OK).json({message: "HELLO"});
+  res.status(HTTPStatus.OK).json({message: "Live update"});
 });
 
 app.listen(port, () => {
