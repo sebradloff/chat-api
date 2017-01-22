@@ -1,10 +1,10 @@
-const express = require('express');
-const HTTPStatus = require('http-status');
+import express from 'express';
+import HTTPStatus from 'http-status';
 
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.get('*', function(req, res) {
+app.get('*', (req, res) => {
   res.status(HTTPStatus.OK).json({message: "HELLO"});
 });
 

@@ -4,12 +4,19 @@
   "description": "Simple chat API with postgresql db, allowing users to talk to one another",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node dist/server.bundle.js",
+    "build": "webpack --config webpack.config.js"
   },
   "author": "Sebastian Radloff",
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0",
     "http-status": "^0.2.5"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "webpack": "^1.14.0"
   }
 }
