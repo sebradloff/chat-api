@@ -1,10 +1,11 @@
 CREATE SCHEMA IF NOT EXISTS chat_api;
+CREATE EXTENSION "pgcrypto";
 CREATE TABLE IF NOT EXISTS chat_api.user (
-  id UUID PRIMARY KEY NOT NULL,
+  id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
   name TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS chat_api.message (
-  id UUID PRIMARY KEY NOT NULL,
+  id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
   contents TEXT NOT NULL,
   date_sent TIMESTAMP NOT NULL DEFAULT NOW(),
   sender_id UUID NOT NULL,
