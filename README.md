@@ -1,5 +1,8 @@
 # chat-api
 
+# Tests
+To run the tests, the app must be running, `$ npm start && npm run test`.
+
 # DB table design
 I ended up choosing postgresql as the db of choice, mainly b/c I know it is supported on heroku with node applications.
 
