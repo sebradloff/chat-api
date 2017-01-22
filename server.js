@@ -22,7 +22,7 @@ client.connect();
 app.post('/users', (req, res) => {
   const name = req.body.name;
 
-  if (name === undefined) {
+  if (name === '' || name === undefined) {
     res.status(HTTPStatus.BAD_REQUEST).send({error: 'Please provide a name field to create a user.'});
   } else {
     const createUser = client.query('INSERT INTO chat_api.user (name) VALUES ($1) RETURNING chat_api.user.id, chat_api.user.name;', [name]);
