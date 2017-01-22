@@ -1,0 +1,12 @@
+CREATE SCHEMA IF NOT EXISTS chat_api;
+CREATE TABLE IF NOT EXISTS chat_api.user (
+  id UUID PRIMARY KEY NOT NULL,
+  name TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS chat_api.message (
+  id UUID PRIMARY KEY NOT NULL,
+  contents TEXT NOT NULL,
+  date_sent TIMESTAMP NOT NULL DEFAULT NOW(),
+  sender_id UUID NOT NULL,
+  receiver_id UUID NOT NULL
+);
