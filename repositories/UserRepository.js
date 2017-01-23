@@ -1,3 +1,5 @@
+import Promise from 'promise';
+
 class UserRepository {
 
   constructor(client) {
@@ -5,10 +7,16 @@ class UserRepository {
   }
 
   createUser(name) {
-    return this.client
-      .query("INSERT INTO chat_api.user (name) VALUES ($1) " +
-             "RETURNING chat_api.user.id, chat_api.user.name;",
-              [name]);
+    return new Promise((resolve, reject) => {
+      this.client
+        .query("INSERT INTO chat_api.user (name) VALUES ($1) " +
+               "RETURNING chat_api.user.id, chat_api.user.name;",
+                [name],
+              (error, result) => {
+                if (error) reject(error);
+                resolve(result);
+              });
+    });
   }
 
 }
