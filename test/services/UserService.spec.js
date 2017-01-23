@@ -28,5 +28,34 @@ describe('UserService', () => {
           done();
         });
     });
+    it("should throw an error when the name is left blank", (done) => {
+      // given
+      const blankName = "";
+      const requestBody = {blankName};
+      const errorMessage = 'Please provide a name field to create a user.';
+      const userRepository = new UserRepository("FAKE_DB");
+      // when
+      const userService = new UserService(userRepository);
+      userService.createUser(requestBody)
+        .catch((error) => {
+          // then
+          error.should.equal(errorMessage);
+          done();
+        });
+    });
+    it("should throw an error when the name is undefined", () => {
+      // given
+      const requestBody = {};
+      const errorMessage = 'Please provide a name field to create a user.';
+      const userRepository = new UserRepository("FAKE_DB");
+      // when
+      const userService = new UserService(userRepository);
+      userService.createUser(requestBody)
+        .catch((error) => {
+          // then
+          error.should.equal(errorMessage);
+          done();
+        });
+    });
   });
 });
