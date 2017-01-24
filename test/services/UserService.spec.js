@@ -7,8 +7,8 @@ import sinonChai from "sinon-chai";
 chai.should();
 chai.use(sinonChai);
 
-import UserService from '../../services/UserService';
-import UserRepository from '../../repositories/UserRepository';
+import UserService from '../../src/services/UserService';
+import UserRepository from '../../src/repositories/UserRepository';
 
 describe('UserService', () => {
   describe('#createUser', () => {

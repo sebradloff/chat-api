@@ -5,7 +5,7 @@ import sinonChai from 'sinon-chai';
 chai.should();
 chai.use(sinonChai);
 
-import UserRepository from '../../repositories/UserRepository';
+import UserRepository from '../../src/repositories/UserRepository';
 
 describe('UserRepository', () => {
   let userRepository, querySpy, PG_CLIENT;

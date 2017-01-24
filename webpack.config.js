@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const serverConfig = {
-  entry: path.resolve(__dirname, 'server.js'),
+  entry: path.resolve(__dirname, 'src/server.js'),
   resolve: {
     extensions: ['', '.js', '.json']
   },
