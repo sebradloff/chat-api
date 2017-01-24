@@ -1,6 +1,7 @@
 import express from 'express';
 import HTTPStatus from 'http-status';
 import PgPool from '../PgPoolConfig';
+import logger from '../Logger';
 
 import UserService from '../services/UserService';
 import UserRepository from '../repositories/UserRepository';
@@ -19,6 +20,7 @@ UserController.get('/:id', (req, res) => {
 });
 
 UserController.post('/', (req, res) => {
+  logger.log('info', `create user request with payload ${JSON.stringify(req.body)}`);
   userService.createUser(req.body)
     .then((responseObject) => {
       res.status(HTTPStatus.CREATED).send(responseObject);
