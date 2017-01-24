@@ -13,7 +13,7 @@
     "dev": "concurrently \"npm run build -- --watch\" \"nodemon dist/server.bundle.js\"",
     "test": "mocha",
     "lint": "eslint --config=./.eslintrc src/**/*.js*",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "webpack --config webpack.config.js"
   },
   "author": "Sebastian Radloff",
   "license": "ISC",
