@@ -1,0 +1,23 @@
+{
+  # specifies global predefined variables
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true,
+    "jquery": true
+  },
+  # extends the .eslintrc file from airbnb
+  "extends": "eslint-config-airbnb",
+  # in the rules section you overide the settings from the parent configuration
+  # for more info on rule configuration: http://eslint.org/docs/user-guide/configuring#configuring-rules
+  # list of eslint rules http://eslint.org/docs/rules/
+  "rules": {
+    comma-dangle: ["error", "never"],
+    max-len: ["error", 120],
+    no-console: "error",
+    arrow-body-style: ["error", "as-needed"],
+    no-unused-expressions: ["error", { "allowShortCircuit": true }],
+    camelcase: ["off"]
+  }
+}
