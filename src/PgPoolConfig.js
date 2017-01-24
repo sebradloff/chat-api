@@ -1,14 +1,13 @@
 import pg from 'pg';
+import pgConString from 'pg-connection-string';
 
-const Client = pg.Client;
 const DATABASE_URL = process.env.DATABASE_URL || "postgresql://localhost/test_db";
+const options = pgConString.parse(DATABASE_URL);
 
 // needed to connect to heroku heroku postgresql instance
 if (process.env.NODE_ENV === 'production') {
-  pg.defaults.ssl = true;
+  options.ssl = true;
 }
+const PgPool = new pg.Pool(options);
 
-const PgClient = new Client(DATABASE_URL);
-PgClient.connect();
-
-export default PgClient;
+export default PgPool;
