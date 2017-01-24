@@ -58,4 +58,35 @@ describe('UserService', () => {
         });
     });
   });
+  describe("#getUser", () => {
+    it("should call UserRepository#getUser and resolve an responseObject wiht id and name", (done) => {
+      // give
+      const name = "Sebastian", version4UUID = "c878b9ba-8e58-47ef-9598-6b0cea932b51";
+      const resolved = {rows: [{name, id: version4UUID}]};
+      const userRepository = new UserRepository("FAKE_DB");
+      // when
+      const userRepositoryStub = sinon.stub(userRepository, "getUser").withArgs(version4UUID).resolves(resolved);
+      const userService = new UserService(userRepository);
+      userService.getUser(version4UUID)
+        .then((result) => {
+          // then
+          result.should.deep.equal({id: version4UUID, name});
+          done();
+        });
+    });
+    it("should throw an error when the id is NOT a valid uuid", (done) => {
+      // given
+      const invalidUUID = '123';
+      const errorMessage = 'Please provide a valid id parameter to get a user.';
+      const userRepository = new UserRepository("FAKE_DB");
+      // when
+      const userService = new UserService(userRepository);
+      userService.getUser(invalidUUID)
+        .catch((error) => {
+          // then
+          error.should.equal(errorMessage);
+          done();
+        });
+    });
+  });
 });
