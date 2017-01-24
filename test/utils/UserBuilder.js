@@ -22,7 +22,6 @@ class UserBuilder {
                   [this.id, this.name],
                 (error, result) => {
                   if (error) reject(error);
-                  console.log("initial insert", result.rows)
                   resolve(result);
                   done();
                 });
