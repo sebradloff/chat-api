@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "Simple chat API with postgresql db, allowing users to talk to one another",
   "main": "index.js",
+  "engines": {
+    "node": "5.11.1",
+    "npm": "3.8.6"
+  },
   "scripts": {
     "start": "node dist/server.bundle.js",
     "build": "webpack --config webpack.config.js",
     "dev": "concurrently \"npm run build -- --watch\" \"nodemon dist/server.bundle.js\"",
     "test": "mocha",
-    "lint": "eslint --config=./.eslintrc src/**/*.js*"
+    "lint": "eslint --config=./.eslintrc src/**/*.js*",
+    "heroku-postbuild": "build"
   },
   "author": "Sebastian Radloff",
   "license": "ISC",
