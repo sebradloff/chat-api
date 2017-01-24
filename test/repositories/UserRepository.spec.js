@@ -50,5 +50,16 @@ describe('UserRepository', () => {
           done();
         })
     });
+    it('should not find the user if they do not exist in the db', (done) => {
+      // given
+      const idNotInDB = 'bcf0df00-e1e4-11e6-bf01-fe55135034f3';
+      // when
+      userRepository.getUser(idNotInDB)
+        .then((result) => {
+          // then
+          result.rowCount.should.equal(0);
+          done();
+        })
+    });
   });
 });
