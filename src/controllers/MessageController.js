@@ -13,9 +13,9 @@ const MessageController = express();
 MessageController.post('/', (req, res) => {
   messageService.createMessage(req.body)
     .then((responseObject) => {
-      res.status(HTTPStatus.CREATED).send(responseObject)
+      res.status(HTTPStatus.CREATED).send(responseObject);
     })
-    .catch((error) => res.status(HTTPStatus.BAD_REQUEST).send({error}));
+    .catch(error => res.status(HTTPStatus.BAD_REQUEST).send({ error }));
 });
 
 export default MessageController;

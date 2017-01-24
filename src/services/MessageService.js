@@ -1,5 +1,4 @@
 import Promise from 'promise';
-import uuidValidate from 'uuid-validate';
 
 class MessageService {
 
@@ -8,9 +7,9 @@ class MessageService {
   }
 
   createMessage(requestBody) {
-    const {sender_id, receiver_id, contents} = requestBody;
-    return new Promise((resolve, reject) => {
-      this.messageRepository.createMessage({sender_id, receiver_id, contents})
+    const { sender_id, receiver_id, contents } = requestBody;
+    return new Promise((resolve) => {
+      this.messageRepository.createMessage({ sender_id, receiver_id, contents })
         .then((result) => {
           resolve(result.rows[0]);
         });

@@ -14,9 +14,7 @@ class UserService {
 
       this.userRepository.createUser(name)
         .then((result) => {
-          const id = result.rows[0].id;
-          const name = result.rows[0].name;
-          resolve({id, name});
+          resolve(result.rows[0]);
         });
     });
   }
@@ -27,9 +25,7 @@ class UserService {
 
       this.userRepository.getUser(id)
         .then((result) => {
-          const id = result.rows[0].id;
-          const name = result.rows[0].name;
-          resolve({id, name});
+          resolve(result.rows[0]);
         });
     });
   }
