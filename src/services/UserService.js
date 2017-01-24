@@ -15,6 +15,9 @@ class UserService {
       this.userRepository.createUser(name)
         .then((result) => {
           resolve(result.rows[0]);
+        })
+        .catch((error) => {
+          reject(error);
         });
     });
   }
