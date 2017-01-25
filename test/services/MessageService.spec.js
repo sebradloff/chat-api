@@ -54,5 +54,29 @@ describe('MessageService', () => {
           done();
         });
     });
+    it('should error when userId1 is NOT a valid uuid with the correct error messages', (done) => {
+      const userId1 = 'NOT-REAL-UUID';
+      const userId2 = '2ea6c0eb-93c3-4dca-969e-2a159e0c9f04';
+
+      const messageService = new MessageService('FAKE_REPOSITORY');
+      messageService.getAllMessagesBetweenTwoUsers(userId1, userId2)
+        .catch((error) => {
+          // then
+          error.should.deep.equal('Please provide a valid uuid for userId1.');
+          done();
+        });
+    });
+    it('should error when userId1 is NOT a valid uuid with the correct error messages', (done) => {
+      const userId1 = '2ea6c0eb-93c3-4dca-969e-2a159e0c9f04';
+      const userId2 = 'NOT-REAL-UUID';
+
+      const messageService = new MessageService('FAKE_REPOSITORY');
+      messageService.getAllMessagesBetweenTwoUsers(userId1, userId2)
+        .catch((error) => {
+          // then
+          error.should.deep.equal('Please provide a valid uuid for userId2.');
+          done();
+        });
+    });
   });
 });
