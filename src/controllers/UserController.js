@@ -11,6 +11,14 @@ const userService = new UserService(userRepository);
 
 const UserController = express();
 
+UserController.get('/', (req, res) => {
+  userService.getAllUsers()
+    .then((responseObject) => {
+      res.status(HTTPStatus.OK).send(responseObject);
+    })
+    .catch(error => res.status(HTTPStatus.BAD_REQUEST).send({ error }));
+});
+
 UserController.get('/:id', (req, res) => {
   userService.getUser(req.params.id)
     .then((responseObject) => {
