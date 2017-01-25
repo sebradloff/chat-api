@@ -1,25 +1,21 @@
-import PgPool from '../../src/PgPoolConfig';
 import uuid from 'node-uuid';
+import PgPool from '../../src/PgPoolConfig';
 
 class UserBuilder {
-  constructor({name, id}) {
-    this.name = name || 'Very Cool Person';
-    this.id = id || uuid.v4();
+  constructor() {
     this.pool = PgPool;
   }
 
-  getUserInfo() {
-    return {name: this.name, id: this.id};
-  }
-
-  createUser() {
+  createUser({ name, id }) {
+    const userName = name || 'Very Cool Person';
+    const userId = id || uuid.v4();
     return new Promise((resolve, reject) => {
       this.pool.connect((err, client, done) => {
         if(err) reject('error fetching client from pool', err);
 
         client.query("INSERT INTO chat_api.user (id, name) VALUES ($1, $2) " +
                  "RETURNING chat_api.user.id, chat_api.user.name;",
-                  [this.id, this.name],
+                  [userId, userName],
                 (error, result) => {
                   if (error) reject(error);
                   resolve(result);
