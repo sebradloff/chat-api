@@ -17,9 +17,9 @@ class UserBuilder {
                  "RETURNING chat_api.user.id, chat_api.user.name;",
                   [userId, userName],
                 (error, result) => {
+                  done();
                   if (error) reject(error);
                   resolve(result);
-                  done();
                 });
       });
     });
