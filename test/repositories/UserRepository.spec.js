@@ -66,12 +66,12 @@ describe('UserRepository', () => {
     let name1, name2, id1, id2, userBuilder;
     beforeEach(() => {
       name1 = 'Cool User 1', id1 = '1c4c9b7e-e1d6-11e6-bf01-fe55135034f3';
-      name2 = 'Cool User 2', id2 = '0b7de571-88b6-4f12-a730-1b3c9df82a99'
+      name2 = 'Cool User 2', id2 = '0b7de571-88b6-4f12-a730-1b3c9df82a99';
       userBuilder = new UserBuilder();
       return (
-        userBuilder.createUser({ name1, id1 })
+        userBuilder.createUser({ name: name1, id: id1 })
           .then(() => {
-            userBuilder.createUser({ name2, id2 });
+            return userBuilder.createUser({ name: name2, id: id2 });
           })
       );
     });
@@ -85,5 +85,5 @@ describe('UserRepository', () => {
           done();
         });
     });
-  })
+  });
 });
