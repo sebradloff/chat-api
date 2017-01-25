@@ -15,7 +15,7 @@ describe('UserRepository', () => {
     userRepository = new UserRepository(PgPool);
   });
   afterEach(() => {
-    return new UserBuilder({}).tearDown();
+    return new UserBuilder().tearDown();
   });
   describe('#createUser', () => {
     it('should successfully create a user return name and id', (done) => {
@@ -28,15 +28,15 @@ describe('UserRepository', () => {
           result.rowCount.should.equal(1);
           result.rows[0].should.include.keys('name', 'id');
           done();
-        })
+        });
     });
   });
   describe('#getUser', () => {
     let name, id, userBuilder;
     beforeEach(() => {
       name = 'Cool User', id = '1c4c9b7e-e1d6-11e6-bf01-fe55135034f3';
-      userBuilder = new UserBuilder({name, id});
-      return userBuilder.createUser();
+      userBuilder = new UserBuilder();
+      return userBuilder.createUser({ name, id });
     });
     it('should successfully get user by id with correct query', (done) => {
       // when
@@ -48,7 +48,7 @@ describe('UserRepository', () => {
           result.rows[0].name.should.equal(name);
           result.rows[0].id.should.equal(id);
           done();
-        })
+        });
     });
     it('should not find the user if they do not exist in the db', (done) => {
       // given
@@ -62,4 +62,28 @@ describe('UserRepository', () => {
         })
     });
   });
+  describe('#getAllUsers', () => {
+    let name1, name2, id1, id2, userBuilder;
+    beforeEach(() => {
+      name1 = 'Cool User 1', id1 = '1c4c9b7e-e1d6-11e6-bf01-fe55135034f3';
+      name2 = 'Cool User 2', id2 = '0b7de571-88b6-4f12-a730-1b3c9df82a99'
+      userBuilder = new UserBuilder();
+      return (
+        userBuilder.createUser({ name1, id1 })
+          .then(() => {
+            userBuilder.createUser({ name2, id2 });
+          })
+      );
+    });
+    it('should return all user names and ids', (done) => {
+      // when
+      userRepository.getAllUsers()
+        .then((result) => {
+          // then
+          result.rowCount.should.equal(2);
+          result.rows[0].should.include.keys('name', 'id');
+          done();
+        });
+    });
+  })
 });
