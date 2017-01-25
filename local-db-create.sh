@@ -1,4 +1,5 @@
 #!/bin/sh
 
 psql -c 'CREATE DATABASE test_db'
-psql -d test_db -f pg_schema
+npm run build
+npm run load:schema

@@ -13,7 +13,8 @@
     "dev": "concurrently \"npm run build -- --watch\" \"nodemon dist/server.bundle.js\"",
     "test": "mocha",
     "lint": "eslint --config=./.eslintrc src/**/*.js*",
-    "heroku-postbuild": "webpack --config webpack.config.js"
+    "heroku-postbuild": "webpack --config webpack.config.js",
+    "load:schema": "node dist/pg_schema.bundle.js"
   },
   "author": "Sebastian Radloff",
   "license": "ISC",

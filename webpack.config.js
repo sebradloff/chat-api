@@ -2,13 +2,16 @@ const fs = require('fs');
 const path = require('path');
 
 const serverConfig = {
-  entry: path.resolve(__dirname, 'src/server.js'),
+  entry: {
+    server: path.resolve(__dirname, 'src/server.js'),
+    pg_schema: path.resolve(__dirname, 'src/pg_schema')
+  },
   resolve: {
     extensions: ['', '.js', '.json']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'server.bundle.js'
+    filename: '[name].bundle.js'
   },
   target: 'node',
   externals: fs.readdirSync('node_modules')
