@@ -89,4 +89,25 @@ describe('UserService', () => {
         });
     });
   });
+  describe('#getAllUsers', () => {
+    it('should call UserRepository#getAllUsers and resolve an responseObject array with two users', (done) => {
+      // give
+      const name1 = "Sebastian", id1 = "c878b9ba-8e58-47ef-9598-6b0cea932b51";
+      const name2 = "Cool Dude", id2 = "0b7de571-88b6-4f12-a730-1b3c9df82a99";
+      const resolved = { rows: [{ name: name1, id: id1 }, { name: name2, id: id2 }] };
+      const userRepository = new UserRepository("FAKE_DB");
+      // when
+      sinon.stub(userRepository, 'getAllUsers').withArgs().resolves(resolved);
+      const userService = new UserService(userRepository);
+      userService.getAllUsers()
+        .then((result) => {
+          // then
+          result.should.include.keys('users');
+          result.users.length.should.equal(2);
+          result.users[0].should.deep.equal({ name: name1, id: id1 });
+          result.users[1].should.deep.equal({ name: name2, id: id2 });
+          done();
+        });
+    });
+  });
 });

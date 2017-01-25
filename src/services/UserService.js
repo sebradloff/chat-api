@@ -33,6 +33,18 @@ class UserService {
     });
   }
 
+  getAllUsers() {
+    return new Promise((resolve, reject) => {
+      this.userRepository.getAllUsers()
+        .then((result) => {
+          resolve({ users: result.rows });
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
 }
 
 export default UserService;
