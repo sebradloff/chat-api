@@ -1,6 +1,6 @@
 import express from 'express';
-import HTTPStatus from 'http-status';
 import bodyParser from 'body-parser';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 import UserController from './controllers/UserController';
 import MessageController from './controllers/MessageController';
@@ -13,8 +13,21 @@ app.use(bodyParser.json());
 app.use('/users', UserController);
 app.use('/messages', MessageController);
 
+const swaggerConfig = {
+  info: {
+    title: 'Sebastian Radloff Chat API',
+    version: '1.0.0'
+  }
+};
+const options = {
+  swaggerDefinition: swaggerConfig,
+  apis: ['./src/controllers/*.js']
+};
+const swaggerSpec = swaggerJSDoc(options);
+
 app.get('*', (req, res) => {
-  res.status(HTTPStatus.OK).json({message: "hello"});
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
 });
 
 app.listen(port, () => {

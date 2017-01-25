@@ -14,6 +14,9 @@ const serverConfig = {
     filename: '[name].bundle.js'
   },
   target: 'node',
+  node: {
+    fs: "empty"
+  },
   externals: fs.readdirSync('node_modules')
     .reduce(function(acc, mod) {
       if (mod === '.bin') {
@@ -24,18 +27,21 @@ const serverConfig = {
       return acc
   }, {}),
   module: {
-   loaders: [
+    loaders: [
       {
-       test: /\.js$/,
-       exclude: /node_modules/,
-       loader: 'babel-loader'
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       {
-       test: /\.json$/,
-       loader: "json",
+        test: /\.json$/,
+        loader: 'json'
+      },
+      { test: /\.js/,
+        loader: 'imports?define=>false'
       }
     ]
   }
-}
+};
 
 module.exports = serverConfig
