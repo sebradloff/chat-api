@@ -14,6 +14,8 @@ paste it in http://editor.swagger.io/#/ (File => Past JSON => import) and see a 
 easy to read api documentation.
 
 # Tests
+Assuming you have an instance of postgresql locally and have it running, you can run the
+local-db-create.sh script.
 To run the tests, the app must be running, `$ npm start && npm run test`.
 
 # Heroku
