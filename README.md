@@ -3,6 +3,10 @@
 # Tests
 To run the tests, the app must be running, `$ npm start && npm run test`.
 
+# Heroku
+When deploying to Heroku, make sure the db is setup. You can run a quick one off task
+which will run the schema.
+`$ heroku run npm run load:schema`
 # DB table design
 I ended up choosing postgresql as the db of choice, mainly b/c I know it is supported on heroku with node applications.
 
