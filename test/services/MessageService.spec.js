@@ -18,7 +18,7 @@ describe('MessageService', () => {
             contents = "New phone, who dis?",
             date_sent = "2017-01-23 22:25:38.344617",
             id = "e0ead320-2100-4746-b08d-5c02b3398726";
-      const requestBody = {sender_id, receiver_id, contents};
+      const requestBody = { sender_id, receiver_id, contents };
 
       const resolved = { rows: [{ sender_id, receiver_id, contents, date_sent, id }] };
       const messageRepository = new MessageRepository('FAKE_DB');
@@ -28,7 +28,45 @@ describe('MessageService', () => {
       messageService.createMessage(requestBody)
         .then((result) => {
           // then
-          result.should.deep.equal({sender_id, receiver_id, contents, date_sent, id});
+          result.should.deep.equal({ sender_id, receiver_id, contents, date_sent, id });
+          done();
+        });
+    });
+    it('should error when sender_id is NOT a valid uuid', (done) => {
+      const sender_id = 'NOT-REAL-UUID';
+      const receiver_id = '2ea6c0eb-93c3-4dca-969e-2a159e0c9f04';
+      const contents = 'Sup?';
+      const requestBody = { sender_id, receiver_id, contents };
+      const messageService = new MessageService('FAKE_REPOSITORY');
+      messageService.createMessage(requestBody)
+        .catch((error) => {
+          // then
+          error.should.deep.equal('Please provide a valid uuid for sender_id.');
+          done();
+        });
+    });
+    it('should error when receiver_id is NOT a valid uuid', (done) => {
+      const sender_id = '2ea6c0eb-93c3-4dca-969e-2a159e0c9f04';
+      const receiver_id = 'NOT-REAL-UUID';
+      const contents = 'Sup?';
+      const requestBody = { sender_id, receiver_id, contents };
+      const messageService = new MessageService('FAKE_REPOSITORY');
+      messageService.createMessage(requestBody)
+        .catch((error) => {
+          // then
+          error.should.deep.equal('Please provide a valid uuid for receiver_id.');
+          done();
+        });
+    });
+    it('should error when contents is NOT in the request body', (done) => {
+      const sender_id = '2ea6c0eb-93c3-4dca-969e-2a159e0c9f04';
+      const receiver_id = '130c9872-b8bb-4ecd-b270-add6cd44a61d';
+      const requestBody = { sender_id, receiver_id };
+      const messageService = new MessageService('FAKE_REPOSITORY');
+      messageService.createMessage(requestBody)
+        .catch((error) => {
+          // then
+          error.should.deep.equal('Please provide some a contents key with your message!');
           done();
         });
     });
