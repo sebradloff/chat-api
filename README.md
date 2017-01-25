@@ -1,5 +1,18 @@
 # chat-api
 
+# User Interaction with the API
+The idea is to create a user, on the post /users route, which returns a user id. Assuming
+two users have created/registered themselves, you can then call get /users to retrieve a list
+of all registered users (names and ids). You can then use those ids to create messages between
+users, /post messages with the receiver_id, sender_id, and contents in the body. Finally, you
+can use the get /messages/users/:usersId1/users/:userId2 to get all the messages sent between
+those users.
+
+# Swagger docs
+The catch all route serves up the swagger json documentation. You can copy this json and
+paste it in http://editor.swagger.io/#/ (File => Past JSON => import) and see a beautiful
+easy to read api documentation.
+
 # Tests
 To run the tests, the app must be running, `$ npm start && npm run test`.
 
